@@ -30,8 +30,7 @@ export function Quiz(props) {
 
             <div id="quizAnswers">
               <div
-                className={`${
-                  props.selectAnswer === quiz.answers[0].answer_id
+                className={`${props.selectedAnswer === quiz.answers[0].answer_id
                     ? "answer selected"
                     : "answer"
                 }`}
@@ -44,8 +43,7 @@ export function Quiz(props) {
                 </button>
               </div>
               <div
-                className={`${
-                  props.selectAnswer === quiz.answers[1].answer_id
+                className={`${props.selectedAnswer === quiz.answers[1].answer_id
                     ? "answer selected"
                     : "answer"
                 }`}

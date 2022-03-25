@@ -22,7 +22,9 @@ const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case types.SET_QUIZ_INTO_STATE:
-      return action.payload;
+      if (action.payload) {
+        return { ...action.payload };
+      } else return initialQuizState;
     default:
       return state;
   }
@@ -54,7 +56,14 @@ const initialFormState = {
   newFalseAnswer: "",
 };
 function form(state = initialFormState, action) {
-  return state;
+  switch (action.type) {
+    case types.INPUT_CHANGE:
+      return action.payload;
+    case types.RESET_FORM:
+      return { ...initialFormState };
+    default:
+      return state;
+  }
 }
 
 export default combineReducers({
@@ -64,3 +73,17 @@ export default combineReducers({
   infoMessage,
   form,
 });
+
+
+
+//Problems
+//Quiz
+//15 i should select bottom answer nav to form and 
+//back and it should be same quiz
+
+//13 findByText('Congrats: "foobarbaz?" is a great question!', queryOptions, waitForOptions)
+
+
+//11passing
+//5,8,9,12,13
+
