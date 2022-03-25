@@ -33,34 +33,40 @@ export function resetForm() {
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
+    //?
+    dispatch(resetForm())
+    //?
     axios
       .get("http://localhost:9000/api/quiz/next")
       .then((res) => {
         dispatch(setQuiz(res.data));
       })
       .catch((err) => {
-        dispatch(err);
+        console.log(err);
       });
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
   };
 }
-export function postAnswer({ quiz_id, answer_id }) {
+
+//{ quiz_id, answer_id }
+export function postAnswer(answer) {
   return function (dispatch) {
+    dispatch(resetForm())
     axios
-      .post(`http://localhost:9000/api/quiz/answer`, { quiz_id, answer_id })
+      .post(`http://localhost:9000/api/quiz/answer`, answer)
       .then((res) => {
-        console.log(res);
-        dispatch(selectAnswer(null));
-        dispatch(setQuiz(null));
-        dispatch(fetchQuiz());
+        console.log(res.data.message);
+        // dispatch(selectAnswer(null));
+        // dispatch(setQuiz(null));
         dispatch(setMessage(res.data.message));
+        dispatch(fetchQuiz());
       })
-      // .catch((err) => {
-      //   debugger;
-      //   console.log(err);
-      // });
+      .catch((err) => {
+        debugger;
+        console.log(err);
+      });
 
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -83,7 +89,7 @@ export function postQuiz({
     })
     .then(res => {
       console.log(res)
-      dispatch(setMessage(`Congrats: "${res.question_text}" is a great question!`))
+      dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
       dispatch(resetForm())
     })
     .catch(err => {

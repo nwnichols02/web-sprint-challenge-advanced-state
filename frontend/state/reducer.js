@@ -21,10 +21,15 @@ function wheel(state = initialWheelState, action) {
 const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
+    case types.RESET_FORM:
+      return state;
     case types.SET_QUIZ_INTO_STATE:
-      if (action.payload) {
-        return { ...action.payload };
-      } else return initialQuizState;
+      return action.payload
+    //Working
+    // case types.SET_QUIZ_INTO_STATE:
+    //   if (action.payload) {
+    //     return { ...action.payload };
+    //   } else return initialQuizState;
     default:
       return state;
   }
@@ -59,8 +64,11 @@ function form(state = initialFormState, action) {
   switch (action.type) {
     case types.INPUT_CHANGE:
       return action.payload;
+      // return {...state, ...action.payload}
     case types.RESET_FORM:
       return { ...initialFormState };
+      // return initialFormState;
+      // return {...state, initialFormState}
     default:
       return state;
   }
@@ -87,3 +95,18 @@ export default combineReducers({
 //11passing
 //5,8,9,12,13
 
+//8passing
+//8,9,10,11,12,13,15
+
+//8,9,12,13
+
+//Quiz 
+//#8 - success message at top of the screen
+
+// #9 - failure message at top of the screen
+
+//#12 - successful submit message at top of the screen
+
+// #13 - successful submit message a top of the screen 
+
+// quiz shouldn't reload when leaving the page.

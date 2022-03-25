@@ -6,7 +6,9 @@ export function Quiz(props) {
   const { quiz, postAnswer } = props;
 
   useEffect(() => {
-    props.fetchQuiz();
+    if(props.quiz === null) {
+      props.fetchQuiz();
+    }
   }, []);
 
   const onClick = (id) => {
@@ -16,10 +18,12 @@ export function Quiz(props) {
   //submit button
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    postAnswer({quiz_id: props.quiz.quiz_id, answer_id: props.selectedAnswer})
+    props.postAnswer({
+      quiz_id: props.quiz.quiz_id, 
+      answer_id: props.selectedAnswer})
   }
 
-  console.log(quiz);
+  // console.log(quiz);
   return (
     <div id="wrapper">
       {
@@ -66,5 +70,12 @@ export function Quiz(props) {
     </div>
   );
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     quiz: state.quiz,
+//     selectedAnswer: state.selectedAnswer
+//   }
+// }
 
 export default connect((state) => state, actionCreators)(Quiz);

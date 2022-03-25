@@ -7,6 +7,7 @@ export function Form(props) {
   const {inputChange, postQuiz, form} = props;
 
   console.log(props.form)
+  
   const onChange = evt => {
     const { value, id } = evt.target;
     const newQuestion = {...form, [id]: value}
