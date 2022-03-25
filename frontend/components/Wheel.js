@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../state/action-creators";
 
-function Wheel(props) {
-  const { moveClockwise, Wheel } = props;
+export function Wheel(props) {
+  const { moveClockwise, moveCounterClockwise, wheel } = props;
 
   const handleMoveClockWise = (evt) => {
     const { value } = evt.target;
@@ -14,9 +14,8 @@ function Wheel(props) {
   return (
     <div id="wrapper">
       <div id="wheel">
-        <div className="cog active" style={{ "--i": 0 }}>
-          B
-        </div>
+        <div className={`${wheel === 0 ? 'cog active' : 'cog'}`} style={{ "--i": 0 }}>{wheel === 0 ? 'B' : ''}</div>
+        {/* <div className="cog active" style={{ "--i": 0 }}>B</div> */}
         <div className="cog" style={{ "--i": 1 }}></div>
         <div className="cog" style={{ "--i": 2 }}></div>
         <div className="cog" style={{ "--i": 3 }}></div>
@@ -26,11 +25,12 @@ function Wheel(props) {
       </div>
       <div id="keypad">
         <button id="counterClockwiseBtn">Counter clockwise</button>
-        <button onClick={handleMoveClockWise} id="clockwiseBtn">Clockwise</button>
+        <button onClick={handleMoveClockWise} id="clockwiseBtn">
+          Clockwise
+        </button>
       </div>
     </div>
   );
 }
 
-
-export default connect (state => state, actionCreators)(Wheel)
+export default connect((state) => state, actionCreators)(Wheel);
