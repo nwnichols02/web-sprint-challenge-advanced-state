@@ -1,38 +1,53 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from "redux";
 import * as types from "./action-types";
-
+//Wheel
 const initialWheelState = 0;
 function wheel(state = initialWheelState, action) {
   switch (action.type) {
     case types.MOVE_CLOCKWISE:
       if (state == 5) {
-        return state = 0;
+        return (state = 0);
       } else return state + 1;
     case types.MOVE_COUNTERCLOCKWISE:
       if (state == 0) {
-        return state = 5;
+        return (state = 5);
       } else return state - 1;
     default:
       return state;
   }
 }
-
+//Quiz
 const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
-  return state;
+  switch (action.type) {
+    case types.SET_QUIZ_INTO_STATE:
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 const initialSelectedAnswerState = null;
 function selectedAnswer(state = initialSelectedAnswerState, action) {
-  return state;
+  switch (action.type) {
+    case types.SET_SELECTED_ANSWER:
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 const initialMessageState = "";
 function infoMessage(state = initialMessageState, action) {
-  return state;
+  switch (action.payload) {
+    case types.SET_INFO_MESSAGE:
+      return action.payload;
+    default:
+      return state;
+  }
 }
-
+//Form
 const initialFormState = {
   newQuestion: "",
   newTrueAnswer: "",
